@@ -23,7 +23,6 @@ const changeChart = () => {
   if (!myChart) myChart = echarts.init(document.getElementById('DiseaseBubble') as HTMLElement)
   var chardata = propchardata.value!
   var [maxValue, temp] = [0, [] as Array<any>]
-  console.log('diseaseBubbleData',chardata)
   chardata.forEach((item) => {
     temp.push(item.DiseasePatCount)
   })
@@ -36,16 +35,6 @@ const changeChart = () => {
     'rgb(193,191,252)',
     'rgb(191,218,255)',
     'rgb(246,219,143)',
-    // '#FAC858',
-    // '#FACD91',
-    // '#516CC0',
-    // '#EE6666',
-    // '#73C0DE',
-    // '#C280FF',
-    // '#91CC75',
-    // '#ff7123',
-    // '#ffc400',
-    // '#5e333f',
   ]
   // 气泡颜色备份
   let bakeColor = [...color]

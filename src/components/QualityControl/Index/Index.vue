@@ -53,8 +53,8 @@ let AllInfo: IndexAllInfo = new IndexAllInfo()
 
 let RefAllInfo = ref(AllInfo)
 
-const GetValue = (date: any=undefined, datestring: Array<string> = []) => {
-  console.log(datestring,date)
+const GetValue = (date: any = undefined, datestring: Array<string> = []) => {
+  console.log(datestring, date)
   GetChartData(datestring[0], datestring[1])
     .then((res: any) => {
       RefAllInfo.value = res
@@ -65,92 +65,93 @@ const GetValue = (date: any=undefined, datestring: Array<string> = []) => {
     .finally(() => { })
 }
 onBeforeMount(() => {
-   GetValue(undefined, [dayjs().subtract(30, 'day').toString(),dayjs().toString()])
+  GetValue(undefined, [dayjs().subtract(30, 'day').toString(), dayjs().toString()])
 });
 </script>
-<style scoped>
+<style scoped lang="less">
+@DivColor: white;
+
 div {
   border-radius: 5px;
 }
 
 .Body {
   background-color: rgb(223, 223, 224);
-  height: 100vh;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 15px;
-}
 
-.TopDivContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 20px;
-  height: 10%;
-}
+  .TopDivContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    height: 10%;
 
-.TopDiv {
-  background-color: white;
-  width: 23%;
-  display: flex;
-  justify-items: center;
-  align-items: center;
-}
+    .TopDiv {
+      background-color: @DivColor;
+      width: 23%;
+      display: flex;
+      justify-items: center;
+      align-items: center;
+    }
+  }
 
-.CenterDivContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 20px;
-  height: 30%;
-}
+  .CenterDivContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    height: 30%;
 
-.CenterLeftDivContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 74.4%;
-}
+    .CenterLeftDivContainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 74.4%;
 
-.CenterLeftDiv {
-  background-color: white;
-  width: 23%;
-}
+      .CenterLeftDiv {
+        background-color: @DivColor;
+        width: 23%;
+      }
+    }
 
-.CenterRightDivContainer {
-  background-color: white;
-  width: 23%;
-}
+    .CenterRightDivContainer {
+      background-color: @DivColor;
+      width: 23%;
+    }
 
-.BottomDivContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 20px;
-  height: 45%;
-}
+  }
 
-.BottomLeftDivContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 74.4%;
-}
+  .BottomDivContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    height: 45%;
 
-.BottomLeftDiv1 {
-  background: white;
-  width: 40%;
-}
+    .BottomLeftDivContainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 74.4%;
 
-.BottomLeftDiv2 {
-  background: white;
-  width: 55%;
-}
+      .BottomLeftDiv1 {
+        background: @DivColor;
+        width: 40%;
+      }
 
-.BottomRightDivContainer {
-  background-color: white;
-  width: 23%;
+      .BottomLeftDiv2 {
+        background: @DivColor;
+        width: 55%;
+      }
+    }
+
+    .BottomRightDivContainer {
+      background-color: @DivColor;
+      width: 23%;
+    }
+  }
 }
 </style>

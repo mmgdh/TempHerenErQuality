@@ -5,19 +5,14 @@ import QualityIndex from './components/QualityControl/Index/Index.vue'
 </script>
 
 <template>
-  <QualityIndex/>
+  <router-view class="ContainerCSS"></router-view>
+
+  <!-- <QualityIndex/> -->
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.ContainerCSS {
+  height: 100vh;
+  width: 100%;
 }
 </style>
