@@ -8,7 +8,7 @@
                     <a-select-option value="季度"> 季度 </a-select-option>
                     <a-select-option value="年"> 年 </a-select-option>
                 </a-select>
-                <a-date-picker v-show="DateType == '月'" v-model:value="mouth" picker="month" />
+                <a-date-picker v-show="DateType == '月'" v-model:value="month" picker="month" />
                 <a-range-picker v-show="DateType == '年'" v-model:value="year" picker="month" />
                 <a-date-picker v-show="DateType == '季度'" v-model:value="season" picker="quarter" />
                 <a-button type="primary" @click="SearchFunc">
@@ -37,21 +37,18 @@ import { ref, reactive, provide } from 'vue';
 import dayjs, { Dayjs } from 'dayjs';
 import { useRouter } from 'vue-router'
 import { SearchOutlined } from '@ant-design/icons-vue';
+import { useSearchStore } from '../../../store/SearchStore'
 
 let router = useRouter()
+let SearchStore = useSearchStore()
+
 
 type RangeValue = [Dayjs, Dayjs];
 let DateType = ref('月'),
-    mouth = ref<Dayjs>(),
+    month = ref<Dayjs>(),
     season = ref<RangeValue>(),
     year = ref<RangeValue>(),
-    current = ref(''),
-    searchDateRange = reactive({
-        startDate: new Date(),
-        endData: new Date(),
-        IsMouth: false
-    })
-provide('searchDateRange', searchDateRange);
+    current = ref('')
 
 
 const onMenuSelect = (item: any) => {
@@ -60,9 +57,7 @@ const onMenuSelect = (item: any) => {
 
 const SearchFunc = () => {
     if (DateType.value == '月') {
-        searchDateRange.startDate = mouth.value!.add(-2, 'month').toDate()
-        searchDateRange.endData = mouth.value!.add(1, 'month').toDate()
-        searchDateRange.IsMouth = true
+        SearchStore.ChangeSearchDate(month.value!.add(-2, 'month').startOf('month').toDate(), month.value!.endOf('month').toDate(), true)
     }
 }
 </script>

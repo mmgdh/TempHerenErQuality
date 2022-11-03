@@ -7,25 +7,25 @@
 <script setup lang="ts">
 import * as echarts from 'echarts';
 import { ErReceiveClinicCount } from '../../../../../Entites/E_Workover'
-import { onMounted, inject, watch } from 'vue';
+import { onMounted, inject, watch, ref } from 'vue';
+import { useSearchStore } from '../../../../../store/SearchStore'
+import { storeToRefs } from 'pinia';
+const SearchStore = useSearchStore()
+const refSeachStore = storeToRefs(SearchStore)
 
-var R_ErWorkoverData: any = inject('R_ErWorkoverData')
-var searchDateRange: any = inject('searchDateRange')
-let source: any = [];
+let source: any = ref([]);
 let myChart: any = undefined
-let Title = '';
-watch(R_ErWorkoverData, () => {
-    var startDate: Date = searchDateRange.startDate
-    let mouthNumber: number = startDate.getMonth()
+let Title = ref('');
+watch(refSeachStore.ErWorkoverData, () => {
+    var startDate: Date = SearchStore.searchDateRange.startDate
+    let monthNumber: number = startDate.getMonth()
     let year: number = startDate.getFullYear();
-    Title = ''
-    Title = `${year}.${mouthNumber}-${year}.${mouthNumber + 2} ` + '急诊科接诊工作量变化趋势'
-    source = [];
-    source.push(['月份', mouthNumber + '月', (mouthNumber + 1) + '月', (mouthNumber + 2) + '月'])
-    R_ErWorkoverData.erReceiveClinicCounts.forEach((x: ErReceiveClinicCount) => {
-        source.push([x.xName, x.lstCountPat[0], x.lstCountPat[1], x.lstCountPat[2]])
+    Title.value = `${year}.${monthNumber}-${year}.${monthNumber + 2} ` + '急诊科接诊工作量变化趋势'
+    source.value = [];
+    source.value.push(['月份', monthNumber + '月', (monthNumber + 1) + '月', (monthNumber + 2) + '月'])
+    refSeachStore.ErWorkoverData.value.erReceiveClinicCounts.forEach((x: ErReceiveClinicCount) => {
+        source.value.push([x.xName, x.lstCountPat[0], x.lstCountPat[1], x.lstCountPat[2]])
     });
-    console.log(source)
     GetChart();
 })
 onMounted(() => {
@@ -43,19 +43,19 @@ const GetChart = () => {
 
     option = {
         title: {
-            text: Title,
+            text: Title.value,
             left: 'center'
         },
         legend: { bottom: 10 },
         tooltip: {},
         dataset: {
-            source: source
+            source: source.value
         },
         xAxis: {
             type: 'category',
             axisLabel: {
                 interval: 0,
-                rotate: 0
+                // rotate: 20//控制文字倾斜，如果科室多了可以用这个效果
             },
         },
         yAxis: {},
@@ -63,6 +63,7 @@ const GetChart = () => {
     };
     myChart.resize()
     option && myChart.setOption(option, true);
+
 }
 
 

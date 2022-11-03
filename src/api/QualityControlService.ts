@@ -6,14 +6,14 @@ const api = {
     GetErWorkoverChartData: QualityControl + 'GetErWorkoverChartData'
 }
 
-export function GetChartData(startdate: string, enddate: string): any {
+export function GetChartData(startdate: Date, enddate: Date): any {
     return requestGet(
         api.GetChartData,
         { startdate: startdate, enddate: enddate }
     )
 }
 
-export function GetErWorkoverChartData(startdate: string, enddate: string, isMonth: boolean): any {
+export function GetErWorkoverChartData(startdate: Date, enddate: Date, isMonth: boolean): any {
     return requestGet(
         api.GetErWorkoverChartData,
         { startdate: startdate, enddate: enddate, isMonth:isMonth }

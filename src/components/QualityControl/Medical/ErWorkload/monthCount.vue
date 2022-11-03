@@ -17,9 +17,9 @@
 
 <script setup lang="ts">
 import { ref, reactive, toRefs, onBeforeMount, onMounted, watchEffect, computed } from 'vue';
-import ReceiveCLinicChart from './mouthChart/ReceiveClinicChart.vue'
-import CureChart from './mouthChart/CureChart.vue'
-import RescuePatPercentChart from './mouthChart/RescuePatPercentChart.vue'
+import ReceiveCLinicChart from './monthChart/ReceiveClinicChart.vue'
+import CureChart from './monthChart/CureChart.vue'
+import RescuePatPercentChart from './monthChart/RescuePatPercentChart.vue'
 
 
 </script>

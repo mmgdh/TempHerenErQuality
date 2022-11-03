@@ -19,9 +19,9 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('../components/QualityControl/Medical/ErWorkload/ErWorkload.vue'),
                 children: [
                     {
-                        path: "/MouthCount",
-                        name: "MouthCount",
-                        component: () => import('../components/QualityControl/Medical/ErWorkload/MouthCount.vue')
+                        path: "/MonthCount",
+                        name: "MonthCount",
+                        component: () => import('../components/QualityControl/Medical/ErWorkload/monthCount.vue')
                     }
                 ]
             }

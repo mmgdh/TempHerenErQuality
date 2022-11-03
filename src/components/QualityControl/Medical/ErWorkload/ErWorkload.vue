@@ -1,23 +1,32 @@
 <template>
     <div>
-        <MouthCount></MouthCount>
+        <MonthCount></MonthCount>
     </div>
 </template>
 
 <script setup lang="ts">
-import { watch, inject,provide, reactive } from 'vue';
-import MouthCount from './mouthCount.vue';
+import { watch, inject, provide, reactive, watchEffect } from 'vue';
+import MonthCount from './monthCount.vue';
 import { ErWorkover } from '../../../../Entites/E_Workover'
 import { GetErWorkoverChartData } from '../../../../api/QualityControlService'
+import { useSearchStore } from '../../../../store/SearchStore'
 
-var searchDateRange: any = inject('searchDateRange')
+const SearchStore = useSearchStore()
+
+
 let ErWorkoverData: ErWorkover = new ErWorkover();
 var R_ErWorkoverData = reactive(ErWorkoverData);
-provide('R_ErWorkoverData',R_ErWorkoverData)
-watch(searchDateRange, () => {
-    GetErWorkoverChartData(searchDateRange.startDate, searchDateRange.endData, searchDateRange.IsMouth).then((ret: ErWorkover) => {
-        R_ErWorkoverData.erReceiveClinicCounts = ret.erReceiveClinicCounts;
-    })
+provide('R_ErWorkoverData', R_ErWorkoverData)
+watchEffect(() => {
+    if (SearchStore.searchDateRange.startDate) {
+        //根据查询条件获取急诊工作量图表数据
+        GetErWorkoverChartData(SearchStore.searchDateRange.startDate, SearchStore.searchDateRange.endData, SearchStore.searchDateRange.IsMonth).then((ret: ErWorkover) => {
+            SearchStore.$patch((state)=>{
+                state.ErWorkoverData=ret;
+            })
+        })
+    }
+
 })
 </script>
 <style  lang='less'>
