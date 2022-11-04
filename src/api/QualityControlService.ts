@@ -6,7 +6,7 @@ const api = {
     GetErWorkoverChartData: QualityControl + 'GetErWorkoverChartData'
 }
 
-export function GetChartData(startdate: Date, enddate: Date): any {
+export function GetChartData(startdate: string, enddate: string): any {
     return requestGet(
         api.GetChartData,
         { startdate: startdate, enddate: enddate }
